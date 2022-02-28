@@ -203,6 +203,8 @@ dependencies {
     implementation "io.springfox:springfox-bean-validators"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     implementation 'org.projectlombok:lombok:1.18.20'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
