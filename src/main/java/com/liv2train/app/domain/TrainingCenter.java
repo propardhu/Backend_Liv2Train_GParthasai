@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import lombok.Data;
 import nonapi.io.github.classgraph.json.Id;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,7 +20,7 @@ public class TrainingCenter implements Serializable {
 
     @Id
     @Field("center_code")
-    @Pattern(regexp = "^[A-Za-z0-9]+${12}")
+    @Pattern(message = "invalid centerCode", regexp = "^[A-Za-z0-9]+${12}")
     private String centerCode;
 
     @Field("center_name")
@@ -37,7 +38,7 @@ public class TrainingCenter implements Serializable {
     private String email;
 
     @Field("phone")
-    @Pattern(regexp = "(^$|[0-9]{10})")
+    @Pattern(message = "invalid phoneNumber", regexp = "(^$|[0-9]{10})")
     private String phone;
 
     @Field("address")

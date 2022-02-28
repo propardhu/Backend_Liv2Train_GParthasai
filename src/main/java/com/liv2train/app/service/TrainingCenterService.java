@@ -4,6 +4,7 @@ import com.liv2train.app.domain.TrainingCenter;
 import com.liv2train.app.repository.TrainingCenterRepository;
 import com.liv2train.app.service.dto.TrainingCenterDTO;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,7 @@ public class TrainingCenterService {
     @Autowired
     private TrainingCenterRepository trainingCenterRepository;
 
-    public ResponseEntity<TrainingCenter> save(TrainingCenterDTO data) {
+    public ResponseEntity<TrainingCenter> save(TrainingCenterDTO data) throws URISyntaxException {
         log.debug("model data to be saved-->" + data.toString());
         if (data.getCenterCode() != null) {
             data.setCenterCode(UUID.randomUUID().toString());
