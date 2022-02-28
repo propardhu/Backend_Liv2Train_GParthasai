@@ -14,12 +14,13 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * A user.
  */
-@org.springframework.data.mongodb.core.mapping.Document(collection = "jhi_user")
+@Document(collection = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
