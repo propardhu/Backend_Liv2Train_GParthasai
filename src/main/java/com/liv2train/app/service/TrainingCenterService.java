@@ -10,6 +10,7 @@ import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,7 @@ public class TrainingCenterService {
         List<TrainingCenter> result = trainingCenterRepository.findAll();
         if (result.size() == 0) {
             log.debug("empty-Training Centers List");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result);
         }
         return ResponseEntity.ok(result);
     }
