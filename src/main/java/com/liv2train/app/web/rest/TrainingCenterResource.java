@@ -2,6 +2,7 @@ package com.liv2train.app.web.rest;
 
 import com.liv2train.app.domain.TrainingCenter;
 import com.liv2train.app.repository.TrainingCenterRepository;
+import com.liv2train.app.service.TrainingCenterService;
 import com.liv2train.app.service.dto.TrainingCenterDTO;
 import com.liv2train.app.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -25,28 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class TrainingCenterResource {
 
     @Autowired
-    private TrainingCenterRepository trainingCenterRepository;
+    private TrainingCenterService trainingCenterService;
 
     @PostMapping("/training")
     public ResponseEntity<TrainingCenter> save(@Valid @RequestBody TrainingCenterDTO data) throws URISyntaxException {
-        log.debug("model data to be saved-->" + data.toString());
-        if (data.getCenterCode() != null) {
-            data.setCenterCode(UUID.randomUUID().toString());
-        }
-        TrainingCenter dbData = new TrainingCenter();
-        BeanUtils.copyProperties(data, dbData);
-        log.debug("DB data saving-->" + dbData.toString());
-        dbData = trainingCenterRepository.save(dbData);
-        return ResponseEntity.created(URI.create(new URI("/api/training/") + dbData.getCenterCode())).body(dbData);
+        return trainingCenterService.save(data);
     }
 
     @GetMapping("/training")
     public ResponseEntity<List<TrainingCenter>> getTrainingCenters() {
-        log.debug("get all Training centers");
-        List<TrainingCenter> result = trainingCenterRepository.findAll();
-        if (result.size() == 0) {
-            log.debug("empty----");
-        }
-        return ResponseEntity.ok(result);
+        return trainingCenterService.getTrainingCenter();
     }
 }
